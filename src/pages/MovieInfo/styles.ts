@@ -120,9 +120,9 @@ export const TagContainer = styled.div`
       box-shadow: 0 0 0 1pt ${colors.azulEscuro};
       color: ${colors.azulEscuro};
       list-style-type: none;
-      padding: 0 5px;
+      padding: 3px 10px;
       background-color: #fff;
-      border-radius: 10px;
+      border-radius: 15px;
       margin-right: 10px;
     }
   }

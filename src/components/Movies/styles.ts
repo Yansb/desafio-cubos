@@ -4,6 +4,7 @@ import colors from '../../assets/styles/colors.json';
 export const Movie = styled.div`
   display: flex;
   background-color: ${colors.background};
+  position: relative;
   align-self: center;
   height: 250px;
   width: 100%;
@@ -75,7 +76,7 @@ export const Movie = styled.div`
       padding: 40px;
       span {
         display: flex;
-        margin: -40px 0px 30px 40px;
+        margin: -36px 0px 30px 40px;
         font-size: 16px;
         font-family: abel;
         color: ${colors.data};
@@ -87,7 +88,7 @@ export const Movie = styled.div`
       }
 
       p {
-        text-align: initial;
+        text-align: left;
         font-size: 16px;
         font-family: abel;
         overflow: hidden;
@@ -104,10 +105,10 @@ export const Movie = styled.div`
         padding-top: 30px;
         margin-top: 90px;
         position: absolute;
+        bottom: 12px;
         @media screen and (max-width: 560px) {
           margin-top: 190px;
           margin-left: -30px;
-          max-width: 50px;
         }
 
         li {
@@ -116,9 +117,12 @@ export const Movie = styled.div`
           color: ${colors.azulEscuro};
           list-style-type: none;
           margin-left: 10px;
-          padding: 0 5px;
+          padding: 3px 10px;
           background-color: #fff;
           border-radius: 10px;
+          @media screen and (max-width: 560px) {
+            margin-left: 4px;
+          }
         }
       }
     }

@@ -41,6 +41,7 @@ export const ButtonContainer = styled.button`
   display: flex;
   justify-self: center;
   align-self: center;
+  cursor: pointer;
 
   & + button {
     margin-top: 40px;
