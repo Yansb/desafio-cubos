@@ -7,7 +7,7 @@ import MovieInfo from './pages/MovieInfo';
 const Routes = () => (
   <BrowserRouter>
     <Route component={MovieList} exact path="/" />
-    <Route component={MovieInfo} path="/info" />
+    <Route component={MovieInfo} path="/info/:id" />
   </BrowserRouter>
 );
 

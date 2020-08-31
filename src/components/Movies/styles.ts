@@ -75,6 +75,7 @@ export const Movie = styled.div`
       span {
         margin: -40px 0px 30px 40px;
         font-family: abel;
+        color: ${colors.data};
       }
 
       p {

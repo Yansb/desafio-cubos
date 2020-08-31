@@ -45,8 +45,8 @@ const MovieList: React.FC = () => {
     setPages(id);
   }
 
-  function NavigateToMovieInfo(movie_: IMovies) {
-    history.push('/info', movie_);
+  function NavigateToMovieInfo(movieProps: IMovies) {
+    history.push(`/info/${movieProps.id}`);
   }
 
   useEffect(() => {
