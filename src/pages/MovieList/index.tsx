@@ -38,7 +38,7 @@ const MovieList: React.FC = () => {
   const [genres, setGenres] = useState<IGenres[]>([]);
   const [pages, setPages] = useState(0);
   const history = useHistory();
-  const [search, setSearch] = useState('thor');
+  const [search, setSearch] = useState('');
   const [movies, setMovies] = useState<IMovies[]>([]);
 
   function handlePageChanging(id: number) {
@@ -127,7 +127,7 @@ const MovieList: React.FC = () => {
   return (
     <Container>
       <Header>Movies</Header>
-      <SearchBar>
+      <SearchBar onSubmit={handleFormSubmit}>
         <input
           type="text"
           value={search}

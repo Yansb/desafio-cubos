@@ -87,6 +87,7 @@ export const Movie = styled.div`
       }
 
       p {
+        text-align: initial;
         font-size: 16px;
         font-family: abel;
         overflow: hidden;

@@ -4,8 +4,8 @@ import colors from '../../assets/styles/colors.json';
 export const Container = styled.div`
   margin-top: 35px;
   width: 100%;
-  height: 510px;
-  background-color: ${colors.background};
+  height: 521px;
+  background-color: #f2f2f2;
   @media screen and (max-width: 560px) {
     margin-top: 0;
     height: 100%;
@@ -16,7 +16,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #c9c9c9;
+  background-color: #e6e6e6;
   padding: 10px;
 
   span {
@@ -26,6 +26,9 @@ export const HeaderContainer = styled.div`
   h1 {
     color: ${colors.azulEscuro};
     padding-left: 20px;
+    font-family: abel;
+    font-weight: 400;
+    font-size: 40px;
   }
   span {
     color: ${colors.data};
