@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import { Movie } from './styles';
 
 const Movies: React.FC = ({ children }) => <Movie>{children}</Movie>;

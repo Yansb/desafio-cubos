@@ -3,7 +3,7 @@ import pt from 'date-fns/locale/pt';
 import { format, parseISO } from 'date-fns';
 import { useHistory } from 'react-router-dom';
 import { Header } from '../../components/Header';
-import { Container, SearchBar, Footer } from './styles';
+import { Container, SearchBar, ButtonContainer, Footer } from './styles';
 import Movies from '../../components/Movies';
 import api from '../../services/api';
 
@@ -127,46 +127,47 @@ const MovieList: React.FC = () => {
   return (
     <Container>
       <Header>Movies</Header>
-      <form onSubmit={handleFormSubmit}>
-        <SearchBar
+      <SearchBar>
+        <input
           type="text"
           value={search}
           onChange={event => setSearch(event.target.value)}
           placeholder="Busque um filme por nome, ano ou gênero..."
         />
-      </form>
+      </SearchBar>
       {movies.slice(pages * 5, pages * 5 + 5).map(movie => (
-        <Movies>
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-          />
+        <ButtonContainer
+          type="button"
+          onClick={() => NavigateToMovieInfo(movie)}
+        >
+          <Movies>
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+            />
 
-          <div className="content">
-            <header>
-              <h1>{movie.title}</h1>
-              <div>
-                <span>{movie.vote_average}</span>
+            <div className="content">
+              <header>
+                <h1>{movie.title}</h1>
+                <div>
+                  <span>{movie.vote_average}</span>
+                </div>
+              </header>
+              <div className="info">
+                <span>{movie.dateFormatted}</span>
+                <p>{movie.overview}</p>
+
+                <ul>
+                  {genres
+                    .filter(genre => movie.genre_ids.includes(genre.id))
+                    .map(genre => (
+                      <li key={genre.id}>{genre.name}</li>
+                    ))}
+                </ul>
               </div>
-            </header>
-            <div className="info">
-              <span>{movie.dateFormatted}</span>
-              <p>{movie.overview}</p>
-
-              <ul>
-                {genres
-                  .filter(genre => movie.genre_ids.includes(genre.id))
-                  .map(genre => (
-                    <li>{genre.name}</li>
-                  ))}
-              </ul>
-
-              <button type="button" onClick={() => NavigateToMovieInfo(movie)}>
-                Detalhes
-              </button>
             </div>
-          </div>
-        </Movies>
+          </Movies>
+        </ButtonContainer>
       ))}
       <Footer>
         {movies

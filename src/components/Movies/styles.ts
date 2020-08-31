@@ -6,7 +6,8 @@ export const Movie = styled.div`
   background-color: ${colors.background};
   align-self: center;
   height: 250px;
-  width: 90%;
+  width: 100%;
+  border: none;
   & + div {
     margin-top: 40px;
   }
@@ -34,7 +35,7 @@ export const Movie = styled.div`
 
     header {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       background-color: ${colors.azulEscuro};
       width: 100%;
       height: 55px;
@@ -73,9 +74,16 @@ export const Movie = styled.div`
       flex-direction: column;
       padding: 40px;
       span {
+        display: flex;
         margin: -40px 0px 30px 40px;
+        font-size: 16px;
         font-family: abel;
         color: ${colors.data};
+        @media screen and (max-width: 560px) {
+          margin: -30px 0px 10px 0px;
+          justify-self: center;
+          align-self: center;
+        }
       }
 
       p {

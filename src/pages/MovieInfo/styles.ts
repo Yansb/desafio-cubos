@@ -144,3 +144,15 @@ export const TagContainer = styled.div`
     }
   }
 `;
+
+export const VideoContainer = styled.div`
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  iframe {
+    @media screen and (max-width: 560px) {
+      height: 300px;
+    }
+  }
+`;

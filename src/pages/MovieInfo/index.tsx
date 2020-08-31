@@ -10,6 +10,7 @@ import {
   ImageContainer,
   InfoContainer,
   TagContainer,
+  VideoContainer,
 } from './styles';
 
 import api from '../../services/api';
@@ -30,7 +31,7 @@ interface IMovie {
   popularity: number;
   vote_count: number;
   profit: string;
-  spoken_language: string;
+  spoken_languages: ILanguage[];
   vote_average: number;
   video: boolean;
   dateFormatted: string;
@@ -39,8 +40,27 @@ interface IMovie {
   runtime: number;
 }
 
+interface IVideos {
+  id: number;
+  results: VideosProps[];
+}
+
+interface VideosProps {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  site: string;
+}
+
 interface IDetails {
   id: number;
+}
+
+interface ILanguage {
+  iso_639_1: string;
+  name: string;
 }
 
 interface IGenres {
@@ -48,15 +68,29 @@ interface IGenres {
   name: string;
 }
 
-const MovieInfo: React.FC<IDetails> = props => {
+const MovieInfo: React.FC<IDetails> = () => {
   const { id } = useParams();
   const [movieInfo, setMovieInfo] = useState<IMovie>({} as IMovie);
+  const [video, setVideo] = useState<IVideos>();
 
   function HourToMinutes(totalMinutes: number) {
     const hours = Math.floor(totalMinutes / 60);
     const minutes = Math.floor(totalMinutes % 60);
     return `${hours}h${minutes}min`;
   }
+
+  useEffect(() => {
+    async function loadVideo() {
+      const response = await api.get(`/movie/${id}/videos`, {
+        params: {
+          api_key: 'd9890f102dc9fcf0b442bb23413b8fea',
+          language: 'pt-BR',
+        },
+      });
+      setVideo(response.data);
+    }
+    loadVideo();
+  }, [id]);
 
   useEffect(() => {
     async function loadMovie() {
@@ -66,7 +100,6 @@ const MovieInfo: React.FC<IDetails> = props => {
           language: 'pt-BR',
         },
       });
-      console.log(response.data);
       const data = {
         ...response.data,
         dateFormatted: movieInfo.release_date
@@ -111,7 +144,9 @@ const MovieInfo: React.FC<IDetails> = props => {
 
               <li>
                 <span>Idioma</span>
-                <strong>Inglês</strong>
+                {movieInfo.spoken_languages?.map(lang => (
+                  <strong key={lang.iso_639_1}>{lang.name}</strong>
+                ))}
               </li>
 
               <li>
@@ -148,6 +183,21 @@ const MovieInfo: React.FC<IDetails> = props => {
           </InfoContainer>
         </Content>
       </Container>
+      <VideoContainer>
+        {video?.results[0] ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${video?.results[0].key}`}
+            title={video?.results[0].name}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            width="100%"
+            height="1000px"
+          />
+        ) : (
+          <p />
+        )}
+      </VideoContainer>
     </>
   );
 };
