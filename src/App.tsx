@@ -1,13 +1,14 @@
 import React from 'react';
 import { GlobalStyle } from './assets/styles/global';
-import MovieList from './pages/MovieList';
+
+import Routes from './routes';
 
 function App() {
   return (
-    <div>
-      <MovieList />
+    <>
+      <Routes />
       <GlobalStyle />
-    </div>
+    </>
   );
 }
 

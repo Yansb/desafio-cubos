@@ -1,17 +1,14 @@
 import React, { useEffect, useState, FormEvent } from 'react';
 import pt from 'date-fns/locale/pt';
 import { format, parseISO } from 'date-fns';
-import {
-  Container,
-  Header,
-  SearchBar,
-  Footer,
-} from './styles';
+import { useHistory } from 'react-router-dom';
+import { Header } from '../../components/Header';
+import { Container, SearchBar, Footer } from './styles';
 import Movies from '../../components/Movies';
 import api from '../../services/api';
 
 interface IGenres {
-  id: number;
+  id: string;
   name: string;
 }
 
@@ -21,7 +18,7 @@ interface IMovies {
   adult: boolean;
   overview: string;
   release_date: string;
-  genre_ids: string[];
+  genre_ids: string;
   original_title: string;
   original_language: string;
   popularity: number;
@@ -33,10 +30,24 @@ interface IMovies {
   title: string;
 }
 
+interface IDetails {
+  id: number;
+}
+
 const MovieList: React.FC = () => {
   const [genres, setGenres] = useState<IGenres[]>([]);
-  const [search, setSearch] = useState('');
+  const [pages, setPages] = useState(0);
+  const history = useHistory();
+  const [search, setSearch] = useState('thor');
   const [movies, setMovies] = useState<IMovies[]>([]);
+
+  function handlePageChanging(id: number) {
+    setPages(id);
+  }
+
+  function NavigateToMovieInfo(movie_: IMovies) {
+    history.push('/info', movie_);
+  }
 
   useEffect(() => {
     async function loadGenres(): Promise<void> {
@@ -64,23 +75,24 @@ const MovieList: React.FC = () => {
         },
       });
 
-      const data = response.data.results.map((movie:IMovies) => ({
+      const data = response.data.results.map((movie: IMovies) => ({
         ...movie,
         dateFormatted: movie.release_date
           ? format(parseISO(movie.release_date), 'dd/MM/yyyy', {
-            locale: pt,
-          })
+              locale: pt,
+            })
           : null,
       }));
 
       setMovies(data);
     }
     loadMovies();
-  });
+  }, [pages, search]);
 
   async function handleFormSubmit(event: FormEvent): Promise<void> {
     try {
       event.preventDefault();
+      setPages(0);
 
       const response = await api.get('search/movie', {
         params: {
@@ -95,16 +107,17 @@ const MovieList: React.FC = () => {
         alert('nenhum filme encontrado');
       }
 
-      const data = response.data.results.map((movie:IMovies) => ({
+      const data = response.data.results.map((movie: IMovies) => ({
         ...movie,
         dateFormatted: movie.release_date
           ? format(parseISO(movie.release_date), 'dd/MM/yyyy', {
-            locale: pt,
-          })
+              locale: pt,
+            })
           : null,
       }));
 
       setMovies(data);
+      setSearch('');
     } catch (error) {
       console.log(error);
       alert('Por favor tente novamente');
@@ -113,18 +126,16 @@ const MovieList: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <p>Movies</p>
-      </Header>
+      <Header>Movies</Header>
       <form onSubmit={handleFormSubmit}>
         <SearchBar
           type="text"
           value={search}
-          onChange={(event) => setSearch(event.target.value)}
+          onChange={event => setSearch(event.target.value)}
           placeholder="Busque um filme por nome, ano ou gênero..."
         />
       </form>
-      {movies.map((movie) => (
+      {movies.slice(pages * 5, pages * 5 + 5).map(movie => (
         <Movies>
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -132,7 +143,6 @@ const MovieList: React.FC = () => {
           />
 
           <div className="content">
-
             <header>
               <h1>{movie.title}</h1>
               <div>
@@ -144,20 +154,28 @@ const MovieList: React.FC = () => {
               <p>{movie.overview}</p>
 
               <ul>
-                <li>Ação</li>
-                <li>Aventura</li>
-                <li>Fantasia</li>
+                {genres
+                  .filter(genre => movie.genre_ids.includes(genre.id))
+                  .map(genre => (
+                    <li>{genre.name}</li>
+                  ))}
               </ul>
-            </div>
 
+              <button type="button" onClick={() => NavigateToMovieInfo(movie)}>
+                Detalhes
+              </button>
+            </div>
           </div>
         </Movies>
       ))}
       <Footer>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
+        {movies
+          .filter((_, idx) => idx % 5 === 0)
+          .map((_, idx) => (
+            <button type="button" onClick={() => handlePageChanging(idx)}>
+              {idx + 1}
+            </button>
+          ))}
       </Footer>
     </Container>
   );

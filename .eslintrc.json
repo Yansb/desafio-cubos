@@ -4,8 +4,11 @@
         "es2020": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "airbnb"
+      "plugin:react/recommended",
+      "airbnb",
+      "plugin:@typescript-eslint/recommended",
+      "prettier/@typescript-eslint",
+      "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -16,8 +19,10 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react",
-        "@typescript-eslint"
+      "react",
+      "react-hooks",
+      "@typescript-eslint",
+      "prettier"
     ],
     "rules": {
         "prettier/prettier": "error",
@@ -32,12 +37,7 @@
         "import/prefer-default-export": "off",
         "import/no-duplicates": "off",
         "@typescript-eslint/camelcase": "off",
-        "@typescript-eslint/explicit-function-return-type":[
-          "error",
-          {
-            "allowExpressions": true
-          }
-        ],
+        "@typescript-eslint/explicit-function-return-type":"off",
         "import/extensions":[
           "error",
           "ignorePackages",
