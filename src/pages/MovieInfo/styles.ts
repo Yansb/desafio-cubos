@@ -6,7 +6,7 @@ export const Container = styled.div`
   width: 100%;
   height: 521px;
   background-color: #f2f2f2;
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 1123px) {
     margin-top: 0;
     height: 100%;
   }
@@ -38,7 +38,7 @@ export const HeaderContainer = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: row-reverse;
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 1123px) {
     display: flex;
     flex-direction: column;
   }
@@ -49,7 +49,8 @@ export const ImageContainer = styled.aside`
   img {
     max-width: 350px;
     max-height: 450px;
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 1123px) {
+      width: 100%;
       max-width: 100%;
       max-height: 100%;
     }
@@ -78,14 +79,14 @@ export const InfoContainer = styled.div`
   }
   ul {
     display: flex;
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 1123px) {
       flex-direction: column;
     }
     li {
       margin-right: 30px;
       display: flex;
       flex-direction: column;
-      @media screen and (max-width: 560px) {
+      @media screen and (max-width: 1123px) {
         margin-top: 20px;
       }
       span {
@@ -107,7 +108,7 @@ export const TagContainer = styled.div`
     padding-top: 30px;
     margin-top: 90px;
     position: absolute;
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 1123px) {
       position: relative;
       flex-direction: row;
       margin-top: -90px;
@@ -123,6 +124,7 @@ export const TagContainer = styled.div`
       padding: 3px 10px;
       background-color: #fff;
       border-radius: 15px;
+      margin-right: 10px;
       margin-right: 10px;
     }
   }
@@ -140,6 +142,9 @@ export const TagContainer = styled.div`
     justify-content: center;
     border: 5px solid ${colors.azulClaro};
     box-shadow: 0 0 0 2.5pt ${colors.azulEscuro};
+    @media screen and (max-width: 1123px) {
+      bottom: 80px;
+    }
 
     span {
       color: ${colors.azulClaro};
@@ -154,7 +159,7 @@ export const VideoContainer = styled.div`
   justify-content: center;
   align-self: center;
   iframe {
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 1123px) {
       height: 300px;
     }
   }

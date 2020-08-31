@@ -13,8 +13,11 @@ export const Movie = styled.div`
     margin-top: 40px;
   }
 
-  @media screen and (max-width: 560px) {
-    height: 500px;
+  @media screen and (max-width: 1123px) {
+    height: 900px;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
     flex-direction: column;
     align-items: center;
     border-radius: 5px;
@@ -23,9 +26,13 @@ export const Movie = styled.div`
   img {
     max-height: 250px;
     max-width: 250px;
-    @media screen and (max-width: 560px) {
-      max-width: 150px;
-      max-height: 150px;
+    @media screen and (max-width: 1123px) {
+      max-width: 100%;
+      max-height: 600px;
+      height: 600px;
+    }
+    @media screen and (max-width: 1123px) {
+      height: auto;
     }
   }
 
@@ -80,7 +87,7 @@ export const Movie = styled.div`
         font-size: 16px;
         font-family: abel;
         color: ${colors.data};
-        @media screen and (max-width: 560px) {
+        @media screen and (max-width: 1123px) {
           margin: -30px 0px 10px 0px;
           justify-self: center;
           align-self: center;
@@ -93,7 +100,7 @@ export const Movie = styled.div`
         font-family: abel;
         overflow: hidden;
         text-overflow: ellipsis;
-        @media screen and (max-width: 560px) {
+        @media screen and (max-width: 1123px) {
           font-size: 14px;
         }
       }
@@ -106,7 +113,7 @@ export const Movie = styled.div`
         margin-top: 90px;
         position: absolute;
         bottom: 12px;
-        @media screen and (max-width: 560px) {
+        @media screen and (max-width: 1123px) {
           margin-top: 190px;
           margin-left: -30px;
         }
@@ -120,7 +127,7 @@ export const Movie = styled.div`
           padding: 3px 10px;
           background-color: #fff;
           border-radius: 10px;
-          @media screen and (max-width: 560px) {
+          @media screen and (max-width: 1123px) {
             margin-left: 4px;
           }
         }
