@@ -160,8 +160,9 @@ export const Movie = styled.div`
           margin: 8px;
           padding: 6px 12px;
           background-color: #fff;
-          border-radius: 12px;
+          border-radius: 16px;
           @media screen and (max-width: 1123px) {
+            border-radius: 12px;
             padding: 3px 3px;
           }
         }
