@@ -15,6 +15,7 @@ import {
 
 import api from '../../services/api';
 import { Header } from '../../components/Header';
+import { converter } from '../../utils/AverageToPercent';
 
 interface IMovie {
   id: number;
@@ -111,6 +112,7 @@ const MovieInfo: React.FC<IDetails> = () => {
         budget: DolarFormat(response.data.budget),
         revenue: DolarFormat(response.data.revenue),
         profit: DolarFormat(response.data.revenue - response.data.budget),
+        vote_average: converter(response.data.vote_average),
       };
       setMovieInfo(data);
     }

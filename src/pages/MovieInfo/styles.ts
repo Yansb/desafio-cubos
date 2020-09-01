@@ -104,10 +104,9 @@ export const TagContainer = styled.div`
   ul {
     display: flex;
     align-items: bottom;
+    flex-wrap: wrap;
     justify-content: bottom;
     padding-top: 30px;
-    margin-top: 90px;
-    position: absolute;
     @media screen and (max-width: 1123px) {
       position: relative;
       flex-direction: row;
@@ -143,7 +142,7 @@ export const TagContainer = styled.div`
     border: 5px solid ${colors.azulClaro};
     box-shadow: 0 0 0 2.5pt ${colors.azulEscuro};
     @media screen and (max-width: 1123px) {
-      bottom: 80px;
+      bottom: 120px;
     }
 
     span {
